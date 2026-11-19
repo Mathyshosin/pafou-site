@@ -21,6 +21,9 @@ PUBLIE = "2026-11-19"   # première mise en ligne des pages fixes
 MAJ = "2026-11-19"      # dernière vraie mise à jour des pages fixes : à changer seulement quand leur contenu change
 AUJOURDHUI = date.fromisoformat(os.environ["PAFOU_DATE"]) if os.environ.get("PAFOU_DATE") else datetime.now(ZoneInfo("Europe/Paris")).date()
 RACINE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# Change dès que style.css change : le navigateur recharge alors la nouvelle feuille au lieu de garder l'ancienne.
+import hashlib
+VERSION_CSS = hashlib.md5(open(os.path.join(RACINE, "style.css"), "rb").read()).hexdigest()[:8]
 MOIS = "janvier février mars avril mai juin juillet août septembre octobre novembre décembre".split()
 
 assert [j["slug"] for j in JEUX] == JEUX_SLUGS and [g["slug"] for g in GUIDES] == GUIDES_SLUGS, "slugs.py et contenu.py ne sont plus d'accord"
@@ -157,7 +160,7 @@ def entete(titre_page, description, url, jsonld, prefixe, image=None, type_og="a
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Manrope:wght@800&family=Unbounded:wght@800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{prefixe}style.css">
+  <link rel="stylesheet" href="{prefixe}style.css?v={VERSION_CSS}">
   <link rel="alternate" type="application/rss+xml" title="Le blog PAFOU" href="{BASE}blog/feed.xml">
   <script type="application/ld+json">{json.dumps(jsonld, ensure_ascii=False)}</script>
 </head>
