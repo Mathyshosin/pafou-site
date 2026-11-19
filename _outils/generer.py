@@ -166,7 +166,7 @@ def entete(titre_page, description, url, jsonld, prefixe, image=None, type_og="a
 </head>
 <body class="{classe}">
   <header class="barre"><div class="barre-in">
-    <a class="marque" href="{prefixe or './'}" aria-label="PAFOU, accueil"><img src="{prefixe}img/logo.webp" alt="PAFOU" width="120" height="30"></a>
+    <a class="marque" href="{prefixe or './'}" aria-label="PAFOU, accueil"><img src="{prefixe}img/logo.png" alt="PAFOU" width="120" height="30"></a>
     <nav class="barre-liens" aria-label="Rubriques"><a href="{prefixe}jeux/">Les jeux</a><a href="{prefixe}guides/">Guides</a><a href="{prefixe}blog/">Blog</a><a href="{prefixe}faq/">FAQ</a></nav>
     <a class="bouton petit" href="{APP_STORE}">{POMME} <span>Télécharger</span></a>
   </div></header>
@@ -175,7 +175,7 @@ def entete(titre_page, description, url, jsonld, prefixe, image=None, type_og="a
 
 def pied(prefixe):
     return f"""  <footer class="pied"><div class="pied-in">
-    <div class="pied-marque"><img src="{prefixe}img/logo-clair.webp" alt="PAFOU" width="120" height="30" loading="lazy"><p>Le jeu de soirée qui connaît tes potes. Sur iPhone. Fait en France par <a href="https://laplateformestudio.fr/">La Plateforme</a>.</p></div>
+    <div class="pied-marque"><img src="{prefixe}img/logo-clair.png" alt="PAFOU" width="120" height="30" loading="lazy"><p>Le jeu de soirée qui connaît tes potes. Sur iPhone. Fait en France par <a href="https://laplateformestudio.fr/">La Plateforme</a>.</p></div>
     <nav aria-label="Les jeux"><h2>Les jeux</h2>{''.join(f'<a href="{prefixe}jeux/{j["slug"]}/">{e(j["nom"])}</a>' for j in JEUX)}</nav>
     <nav aria-label="Guides"><h2>Guides</h2>{''.join(f'<a href="{prefixe}guides/{g["slug"]}/">{e(g["titre_court"])}</a>' for g in GUIDES)}</nav>
     <nav aria-label="PAFOU"><h2>PAFOU</h2><a href="{prefixe}blog/">Le blog</a><a href="{prefixe}faq/">Questions fréquentes</a><a href="{prefixe}a-propos/">À propos</a><a href="{SERVEUR}/support">Support</a><a href="{SERVEUR}/confidentialite">Confidentialité</a><a href="{APP_STORE}">PAFOU sur l'App Store</a></nav>
@@ -223,8 +223,12 @@ def faq_html(paires, titre="Questions fréquentes"):
 """
 
 
-def cartes_liens(titre, elements, aria):
-    lignes = "\n".join(f'        <li><a href="{u}">{e(t)}<span>{e(r)}</span></a></li>' for t, r, u in elements)
+def cartes_liens(titre, elements, aria, prefixe_img=None):
+    def ligne(x):
+        t, r, u = x[:3]
+        img = f'<img src="{prefixe_img}img/persos/{x[3]}.webp" alt="" width="64" loading="lazy">' if prefixe_img is not None and len(x) > 3 else ""
+        return f'        <li><a href="{u}">{img}<strong>{e(t)}</strong><span>{e(r)}</span><i aria-hidden="true">→</i></a></li>'
+    lignes = "\n".join(ligne(x) for x in elements)
     return f"""    <nav class="autres" aria-label="{aria}">
       <h2>{titre}</h2>
       <ul>
@@ -260,7 +264,7 @@ def image_partage(chemin, titre, perso, couleur="#FAF9F3"):
     d.rounded_rectangle((52, 58, 1158, 588), 36, fill=NUIT)
     d.rounded_rectangle((40, 44, 1146, 574), 36, fill="#FFFFFF", outline=NUIT, width=6)
     polices = os.path.join(RACINE, "_outils", "polices")
-    logo = Image.open(os.path.join(RACINE, "img", "logo.webp")).convert("RGBA")
+    logo = Image.open(os.path.join(RACINE, "img", "logo.png")).convert("RGBA")
     logo = logo.resize((220, round(logo.height * 220 / logo.width)))
     im.paste(logo, (84, 84), logo)
     taille = 62
@@ -672,7 +676,7 @@ BANDES = [
     ("on-se-decouvre", "menthe", "home-decouverte", "cafe", "Faire connaissance", "Nouvelles", "têtes ?", "Faites connaissance, puis défiez-vous en équipe.", ["3 à 12 joueurs", "Un seul tél", "Sans alcool"], ("Première impression", "Quel métier ferait Hugo dans un film ?")),
     ("bandes-de-potes", "bleu", "bande", "champagne", "Ta bande", "Ta bande.", "Ton classement.", "Remis à zéro chaque mois. Les titres, eux, restent.", ["Invitation par lien", "Classement du mois", "Des titres à partager"], ("1er · Mathys", "10 points ce mois-ci")),
 ]
-CONFETTIS = "".join(f'<i style="left:{x}%;top:{y}%;background:var(--{c});transform:rotate({r}deg)"></i>' for x, y, c, r in [(6, 12, "jaune", 20), (14, 78, "corail", -30), (27, 6, "menthe", 50), (41, 88, "creme", 12), (52, 10, "corail", -18), (63, 80, "jaune", 35), (72, 5, "creme", -40), (83, 70, "menthe", 15), (93, 18, "jaune", -25), (97, 86, "corail", 40), (35, 40, "menthe", 70), (88, 44, "creme", -60)])
+CONFETTIS = "".join(f'<i style="left:{x}%;top:{y}%;background:var(--{c});transform:rotate({r}deg)"></i>' for x, y, c, r in [(6, 12, "jaune", 20), (2, 56, "corail", -30), (27, 6, "menthe", 50), (44, 94, "creme", 12), (52, 10, "corail", -18), (63, 80, "jaune", 35), (72, 5, "creme", -40), (83, 70, "menthe", 15), (93, 18, "jaune", -25), (97, 86, "corail", 40), (56, 52, "menthe", 70), (88, 44, "creme", -60)])
 
 
 def tel(prefixe, ecran, alt, classe=""):
@@ -687,7 +691,7 @@ def page_accueil(publies):
         ORGANISATION, APPLICATION, faq_ld(FAQ_ACCUEIL),
     ]}
     recents = list(reversed(publies))[:3]
-    blog = cartes_liens("Sur le blog", [(a["titre_court"], a["resume"], f"blog/{a['slug']}/") for a in recents], "Derniers articles") if recents else ""
+    blog = cartes_liens("Sur le blog", [(a["titre_court"], a["resume"], f"blog/{a['slug']}/", a["perso"]) for a in recents], "Derniers articles", "") if recents else ""
     bandes = []
     for i, (slug, couleur, ecran, perso, sur, t1, t2, phrase, puces, bulle) in enumerate(BANDES):
         j = next(x for x in JEUX if x["slug"] == slug)
@@ -750,19 +754,20 @@ def page_accueil(publies):
 {chr(10).join(bandes)}
 
     <section class="promesses"><div class="page large">
+      <p class="etiquette nuit">Promis</p>
       <h2>Pas de piège.</h2>
       <div class="quatre">
-        <div class="apparait"><strong>Gratuit pour commencer</strong><p>La Pyramide et les fléchettes sont toujours gratuites. Le reste s'essaie une fois.</p></div>
-        <div class="apparait"><strong>Zéro pub</strong><p>Aucune publicité dans l'app.</p></div>
-        <div class="apparait"><strong>Rien n'est enregistré</strong><p>Tout se dit à voix haute, et ça reste à table.</p></div>
-        <div class="apparait"><strong>Avec ou sans alcool</strong><p>Tous les jeux se jouent sans. Personne n'est forcé.</p></div>
+        <div class="apparait fond-c-jaune"><img src="img/persos/coupe.webp" alt="" width="90" loading="lazy"><strong>Gratuit pour commencer</strong><p>La Pyramide et les fléchettes, toujours. Le reste s'essaie une fois.</p></div>
+        <div class="apparait fond-c-menthe"><img src="img/persos/milk.webp" alt="" width="70" loading="lazy"><strong>Zéro pub</strong><p>Pas une seule publicité dans l'app. Jamais en pleine partie.</p></div>
+        <div class="apparait fond-c-corail"><img src="img/persos/vin.webp" alt="" width="90" loading="lazy"><strong>Rien n'est enregistré</strong><p>Tout se dit à voix haute. Ce qui se dit à table reste à table.</p></div>
+        <div class="apparait fond-c-bleu"><img src="img/persos/cafe.webp" alt="" width="96" loading="lazy"><strong>Avec ou sans alcool</strong><p>Tous les jeux se jouent sans. Personne n'est jamais forcé.</p></div>
       </div>
     </div></section>
 
     <div class="page large">
 {faq_html(FAQ_ACCUEIL, "On te répond")}
       <p><a href="faq/">Toutes les questions</a></p>
-{cartes_liens("Bien choisir son jeu de soirée", [(g["titre_court"], g["resume"], f"guides/{g['slug']}/") for g in GUIDES[:6]], "Guides")}
+{cartes_liens("Bien choisir son jeu de soirée", [(g["titre_court"], g["resume"], f"guides/{g['slug']}/", g["perso"]) for g in GUIDES[:6]], "Guides", "")}
 {blog}
     </div>
 
