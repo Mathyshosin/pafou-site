@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Le blog PAFOU</title>
+    <link>https://pafouapp.fr/blog/</link>
+    <description>Jeux de soirée, règles et idées pour animer une soirée entre amis.</description>
+    <language>fr-FR</language>
+    <item>
+      <title>Règles du jeu de la pyramide : le jeu de cartes de bluff et de mémoire</title>
+      <link>https://pafouapp.fr/blog/regles-jeu-de-la-pyramide/</link>
+      <guid isPermaLink="true">https://pafouapp.fr/blog/regles-jeu-de-la-pyramide/</guid>
+      <pubDate>Thu, 19 Nov 2026 06:00:00 +0100</pubDate>
+      <description>Les règles du jeu de la pyramide expliquées pas à pas : 4 cartes par joueur, 15 cartes à retourner, bluff, « Menteur ! » et version points ou gages.</description>
+    </item>
+    <item>
+      <title>Questions action ou vérité : 50 vérités et 40 actions pour ta soirée</title>
+      <link>https://pafouapp.fr/blog/questions-action-ou-verite/</link>
+      <guid isPermaLink="true">https://pafouapp.fr/blog/questions-action-ou-verite/</guid>
+      <pubDate>Thu, 19 Nov 2026 06:00:00 +0100</pubDate>
+      <description>90 questions action ou vérité originales, classées par ambiance : pour commencer, entre potes proches et drôles. Sans alcool et sans rien de gênant.</description>
+    </item>
+    <item>
+      <title>Jeux de soirée entre potes : 17 idées à lancer sans rien préparer</title>
+      <link>https://pafouapp.fr/blog/jeux-de-soiree-entre-potes/</link>
+      <guid isPermaLink="true">https://pafouapp.fr/blog/jeux-de-soiree-entre-potes/</guid>
+      <pubDate>Thu, 19 Nov 2026 06:00:00 +0100</pubDate>
+      <description>17 jeux de soirée entre potes classés par nombre de joueurs, de 2 à plus de 10, avec les règles en quelques lignes et zéro matériel à sortir.</description>
+    </item>
+  </channel>
+</rss>
