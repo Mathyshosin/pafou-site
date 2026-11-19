@@ -303,6 +303,7 @@ def page_jeu(j):
          "keywords": [j["nom"], j["etiquette"], "jeu de soirée", "PAFOU"]},
         APPLICATION, faq_ld(j["faq"]), fil_ld(("Les jeux", BASE + "jeux/"), (j["nom"], url)),
     ]}
+    bd = next(x for x in BANDES if x[0] == j['slug'])
     fiche = "\n".join(f"          <div><dt>{e(k)}</dt><dd>{e(v)}</dd></div>" for k, v in j["fiche"])
     en_bref = "\n".join(f"          <li>{b}</li>" for b in j["en_bref"])
     autres = [x for x in JEUX if x["slug"] != j["slug"]]
@@ -313,18 +314,26 @@ def page_jeu(j):
     logo = f'<img class="logo-jeu" src="{prefixe}img/jeux/{j["logo"]}.webp" alt="" width="64" height="64">' if j["logo"] else ""
     return (
         entete(j["titre_seo"], j["description"], url, jsonld, prefixe, image, classe="theme-" + j["couleur"])
-        + f"""  <main class="page">
+        + f"""  <main>
+    <section class="bande fond-{bd[1]} bande-jeu">
+      <div class="confettis" aria-hidden="true">{CONFETTIS}</div>
+      <div class="bande-in">
+        <div class="bande-texte">
+          <h1><span class="etiquette">{e(j['titre'])}</span><span class="autocollant"><span>{e(bd[5])}</span> <span class="accent">{e(bd[6])}</span></span></h1>
+          <p class="phrase">{e(bd[7])}</p>
+          <p class="puces">{''.join(f'<span>{e(x)}</span>' for x in bd[8])}</p>
+          <a class="bouton-store" href="{APP_STORE}" aria-label="Télécharger PAFOU dans l'App Store">{POMME.replace('width="18" height="18"', 'width="30" height="30"')}<span><small>Jouer sur iPhone</small>App Store</span></a>
+        </div>
+        <div class="bande-visuel">
+          {tel(prefixe, j['ecran'], "Écran de " + j["nom"] + " dans l'app PAFOU")}
+          <img class="perso flotte" src="{prefixe}img/persos/{j['perso']}.webp" alt="" width="170">
+          <div class="bulle"><strong>{e(bd[9][0])}</strong><small>{e(bd[9][1])}</small></div>
+        </div>
+      </div>
+    </section>
+  <div class="page">
     {fil(prefixe, ("Les jeux", "../"), (j["nom"], None))}
     <article>
-      <div class="hero-jeu">
-        <div>
-          <p class="sur">{logo}<span class="pastille">{e(j['etiquette'])}</span></p>
-          <h1>{e(j['titre'])}</h1>
-          <p class="accroche">{e(j['accroche'])}</p>
-          <a class="bouton" href="{APP_STORE}">{POMME} Jouer sur iPhone</a>
-        </div>
-        <div class="telephone"><img src="{prefixe}img/ecrans/{j['ecran']}.webp" alt="Écran du jeu {e(j['nom'])} dans l'app PAFOU" width="260" height="563"></div>
-      </div>
       <p class="reponse"><strong>En deux mots :</strong> {e(j['reponse'])}</p>
       <dl class="fiche">
 {fiche}
@@ -341,6 +350,7 @@ def page_jeu(j):
       <p class="meta">Par l'équipe PAFOU · mis à jour le <time datetime="{j.get('maj', MAJ)}">{date_fr(date.fromisoformat(j.get('maj', MAJ)))}</time></p>
     </article>
 {blocs}{cartes_liens("Les autres jeux de PAFOU", [(a["nom"], a["accroche"], f"../{a['slug']}/") for a in autres], "Autres jeux")}
+  </div>
   </main>
 """
         + pied(prefixe)
@@ -648,6 +658,24 @@ def flux(publies):
 FAQ_ACCUEIL = [FAQ[0][1][0], FAQ[0][1][2], FAQ[1][1][1], FAQ[1][1][0], FAQ[2][1][0], FAQ[2][1][3]]
 
 
+BANDES = [
+    ("la-pyramide", "bleu", "pyramide", "vin", "Toujours gratuit", "Bluffe.", "Crie menteur !", "Tu dis que tu as la carte. Vrai ou pas ? Tes potes décident.", ["2 à 8 joueurs", "Bluff et mémoire", "20 min"], ("« J'ai un As. »", "Tu le crois ?")),
+    ("les-dossiers", "corail", "dossiers", "mojito", "Questions entre potes", "Balance", "tes potes.", "Des questions qui citent les gens à table par leur prénom.", ["2 à 8 joueurs", "3 niveaux", "Les autres parient"], ("Pour Léa", "Montre ta dernière photo.")),
+    ("cap-d-assumer", "menthe", "action", "canette", "Action ou vérité", "Action", "ou vérité ?", "Tu racontes, ou tu oses. Toute la table regarde.", ["2 à 8 joueurs", "3 niveaux", "On peut passer"], ("Jules t'a désigné", "Vérité ou action ?")),
+    ("la-tournee", "jaune", "tournee", "gobelet", "Mini-jeux", "Dix mini-jeux", "entre potes.", "Votes secrets, intrus, réflexes. Douze manches, quinze minutes.", ["3 à 8 joueurs", "Chacun son tél", "15 min"], ("L'intrus", "Il ne sait pas que c'est lui.")),
+    ("mode-bar", "bleu", "home-bar", "cocktail", "Au bar", "Un seul tél", "sur la table.", "Vous parlez, vous riez. Le téléphone ne fait qu'arbitrer.", ["3 joueurs et plus", "Sans réseau", "Zéro écran dans les mains"], ("Le Procès", "Coupable ou acquitté ?")),
+    ("flechettes", "jaune", "fleches", "biere", "Fléchettes", "Pas de monnaie ?", "L'app compte.", "301, 501, Cricket. Tu touches la cible, c'est compté.", ["2 à 8 joueurs", "Toujours gratuit", "Sans réseau"], ("Triple 20", "Reste 254")),
+    ("tete-a-tete", "corail", "tete", "whisky", "À deux", "Un premier", "date ?", "Un jeu à deux, trois niveaux. Le perdant paie l'addition.", ["2 joueurs", "Un seul tél", "Vote secret"], ("Niveau suivant ?", "Seulement si vous dites oui tous les deux.")),
+    ("on-se-decouvre", "menthe", "home-decouverte", "cafe", "Faire connaissance", "Nouvelles", "têtes ?", "Faites connaissance, puis défiez-vous en équipe.", ["3 à 12 joueurs", "Un seul tél", "Sans alcool"], ("Première impression", "Quel métier ferait Hugo dans un film ?")),
+    ("bandes-de-potes", "bleu", "bande", "champagne", "Ta bande", "Ta bande.", "Ton classement.", "Remis à zéro chaque mois. Les titres, eux, restent.", ["Invitation par lien", "Classement du mois", "Des titres à partager"], ("1er · Mathys", "10 points ce mois-ci")),
+]
+CONFETTIS = "".join(f'<i style="left:{x}%;top:{y}%;background:var(--{c});transform:rotate({r}deg)"></i>' for x, y, c, r in [(6, 12, "jaune", 20), (14, 78, "corail", -30), (27, 6, "menthe", 50), (41, 88, "creme", 12), (52, 10, "corail", -18), (63, 80, "jaune", 35), (72, 5, "creme", -40), (83, 70, "menthe", 15), (93, 18, "jaune", -25), (97, 86, "corail", 40), (35, 40, "menthe", 70), (88, 44, "creme", -60)])
+
+
+def tel(prefixe, ecran, alt, classe=""):
+    return f'<div class="tel {classe}"><img src="{prefixe}img/ecrans/{ecran}.webp" alt="{e(alt)}" width="260" height="563" loading="lazy"></div>'
+
+
 def page_accueil(publies):
     prefixe = ""
     desc = "PAFOU est le jeu de soirée sur iPhone qui connaît tes potes : bluff, action ou vérité, questions, mini-jeux, mode bar, fléchettes et jeu pour un premier date."
@@ -657,89 +685,98 @@ def page_accueil(publies):
     ]}
     recents = list(reversed(publies))[:3]
     blog = cartes_liens("Sur le blog", [(a["titre_court"], a["resume"], f"blog/{a['slug']}/") for a in recents], "Derniers articles") if recents else ""
+    bandes = []
+    for i, (slug, couleur, ecran, perso, sur, t1, t2, phrase, puces, bulle) in enumerate(BANDES):
+        j = next(x for x in JEUX if x["slug"] == slug)
+        bandes.append(f"""    <section class="bande fond-{couleur}{' inverse' if i % 2 else ''}" id="{slug}">
+      <div class="confettis" aria-hidden="true">{CONFETTIS}</div>
+      <div class="bande-in">
+        <div class="bande-texte apparait">
+          <p class="etiquette">{e(sur)}</p>
+          <h2 class="autocollant"><span>{e(t1)}</span> <span class="accent">{e(t2)}</span></h2>
+          <p class="phrase">{e(phrase)}</p>
+          <p class="puces">{''.join(f'<span>{e(p)}</span>' for p in puces)}</p>
+          <a class="lien-jeu" href="jeux/{slug}/">Découvrir {e(j['nom'])}</a>
+        </div>
+        <div class="bande-visuel apparait">
+          {tel(prefixe, ecran, "Écran de " + j["nom"] + " dans l'app PAFOU")}
+          <img class="perso flotte" src="img/persos/{perso}.webp" alt="" width="170" loading="lazy">
+          <div class="bulle"><strong>{e(bulle[0])}</strong><small>{e(bulle[1])}</small></div>
+        </div>
+      </div>
+    </section>""")
     return (
         entete("PAFOU : le jeu de soirée entre potes sur iPhone", desc, BASE, jsonld, prefixe, type_og="website", classe="accueil")
         + f"""  <main>
-    <section class="hero"><div class="hero-in">
-      <div class="hero-texte">
-        <p class="sur"><span class="pastille jaune">Jeu de soirée sur iPhone</span></p>
-        <h1>Le jeu de soirée qui connaît tes potes</h1>
-        <p class="chapo">Bluff, action ou vérité, questions qui citent les prénoms, mini-jeux, mode bar, fléchettes. Zéro matériel : chacun son téléphone, ou un seul sur la table.</p>
-        <a class="bouton gros" href="{APP_STORE}">{POMME} Télécharger sur l'App Store</a>
-        <p class="sous-bouton">Téléchargement gratuit · iPhone · en français · 17+</p>
+    <section class="hero">
+      <div class="confettis" aria-hidden="true">{CONFETTIS}</div>
+      <div class="hero-in">
+        <div class="hero-texte">
+          <p class="etiquette">Sur iPhone · fait en France</p>
+          <h1 class="autocollant"><span>Le jeu de soirée</span> <span class="accent">qui connaît tes potes.</span></h1>
+          <p class="phrase">Zéro matériel. Chacun son téléphone, ou un seul sur la table.</p>
+          <a class="bouton-store" href="{APP_STORE}" aria-label="Télécharger PAFOU dans l'App Store">{POMME.replace('width="18" height="18"', 'width="30" height="30"')}<span><small>Télécharger dans</small>l'App Store</span></a>
+          <p class="sous-bouton">Téléchargement gratuit · 2 à 12 joueurs</p>
+        </div>
+        <div class="hero-scene">
+          {tel(prefixe, "home-bar", "L'accueil de PAFOU, côté bar", "a")}
+          {tel(prefixe, "pyramide", "Une partie de La Pyramide dans PAFOU", "b")}
+          <img class="perso p1 flotte" src="img/persos/spritz.webp" alt="" width="150">
+          <img class="perso p2 flotte" src="img/persos/canette.webp" alt="" width="110">
+          <img class="perso p3 flotte" src="img/persos/cafe.webp" alt="" width="120">
+          <div class="bulle b1"><strong>MENTEUR !</strong><small>Léa bluffe, Max la grille</small></div>
+        </div>
       </div>
-      <div class="hero-visuel">
-        <img class="hero-mascotte" src="img/mascotte.webp" alt="La mascotte de PAFOU, un verre jaune souriant" width="210" height="194">
-        <div class="telephone"><img src="img/ecrans/pyramide.webp" alt="Une partie de La Pyramide dans l'app PAFOU" width="260" height="563"></div>
-        <img class="hero-perso" src="img/persos/canette.webp" alt="" width="120">
+      <p class="ruban" aria-hidden="true"><span>Bluff</span><span>Dossiers</span><span>Action ou vérité</span><span>Mini-jeux</span><span>Mode bar</span><span>Fléchettes</span><span>Premier date</span><span>Brise-glace</span></p>
+    </section>
+
+    <section class="definition"><div class="page large">
+      <p><strong>PAFOU</strong> est un jeu de soirée pour iPhone, en français, qui réunit <strong>huit jeux dans une seule app</strong> : bluff, questions entre potes, action ou vérité, mini-jeux, mode bar, compteur de fléchettes, jeu pour un premier date et jeu pour briser la glace. De 2 à 12 joueurs, sans matériel.</p>
+    </div></section>
+
+    <section class="simple"><div class="page large">
+      <p class="etiquette nuit">C'est simple</p>
+      <h2>Trois gestes, et la table s'anime.</h2>
+      <div class="trois">
+        <div class="apparait"><img src="img/persos/coupe.webp" alt="" width="84" loading="lazy"><b>01</b><h3>Choisis un jeu</h3><p>Selon l'ambiance et le nombre de joueurs.</p></div>
+        <div class="apparait"><img src="img/persos/milk.webp" alt="" width="70" loading="lazy"><b>02</b><h3>Partage le code</h3><p>Tes potes rejoignent le salon. Ou pose un seul téléphone.</p></div>
+        <div class="apparait"><img src="img/persos/cocktail.webp" alt="" width="84" loading="lazy"><b>03</b><h3>Jouez à voix haute</h3><p>Le téléphone compte et arbitre. Vous, vous parlez.</p></div>
+      </div>
+    </div></section>
+
+{chr(10).join(bandes)}
+
+    <section class="promesses"><div class="page large">
+      <h2>Pas de piège.</h2>
+      <div class="quatre">
+        <div class="apparait"><strong>Gratuit pour commencer</strong><p>La Pyramide et les fléchettes sont toujours gratuites. Le reste s'essaie une fois.</p></div>
+        <div class="apparait"><strong>Zéro pub</strong><p>Aucune publicité dans l'app.</p></div>
+        <div class="apparait"><strong>Rien n'est enregistré</strong><p>Tout se dit à voix haute, et ça reste à table.</p></div>
+        <div class="apparait"><strong>Avec ou sans alcool</strong><p>Tous les jeux se jouent sans. Personne n'est forcé.</p></div>
       </div>
     </div></section>
 
     <div class="page large">
-      <p class="reponse"><strong>PAFOU, c'est quoi ?</strong> PAFOU est un jeu de soirée pour iPhone, en français, qui réunit huit jeux dans une seule app : La Pyramide (bluff et mémoire), Les Dossiers (questions entre potes), Cap d'assumer ? (action ou vérité), La Tournée (mini-jeux), le Mode bar, un compteur de fléchettes, Tête-à-tête pour un premier date et On se découvre pour briser la glace. De 2 à 12 joueurs, sans matériel.</p>
-
-      <section>
-        <h2>Huit jeux, une seule app</h2>
-        <div class="grille">
-{tuiles_jeux(prefixe)}
-        </div>
-      </section>
-
-      <section>
-        <h2>Quel jeu pour quelle soirée ?</h2>
-        <div class="defile"><table>
-<thead><tr><th>Ta soirée</th><th>Le jeu à lancer</th><th>Téléphones</th></tr></thead>
-<tbody>
-<tr><td>Une bande de potes à table</td><td><a href="jeux/la-pyramide/">La Pyramide</a>, <a href="jeux/les-dossiers/">Les Dossiers</a></td><td>Chacun le sien</td></tr>
-<tr><td>Envie d'un action ou vérité</td><td><a href="jeux/cap-d-assumer/">Cap d'assumer ?</a></td><td>Chacun le sien</td></tr>
-<tr><td>La soirée retombe</td><td><a href="jeux/la-tournee/">La Tournée</a></td><td>Chacun le sien</td></tr>
-<tr><td>Au bar</td><td><a href="jeux/mode-bar/">Mode bar</a>, <a href="jeux/flechettes/">fléchettes</a></td><td>Un seul</td></tr>
-<tr><td>Un premier rendez-vous</td><td><a href="jeux/tete-a-tete/">Tête-à-tête</a></td><td>Un seul</td></tr>
-<tr><td>Des gens qui ne se connaissent pas</td><td><a href="jeux/on-se-decouvre/">On se découvre</a></td><td>Un seul</td></tr>
-</tbody>
-        </table></div>
-      </section>
-
-      <section>
-        <h2>Comment ça marche ?</h2>
-        <ol class="etapes">
-          <li><strong>Choisis un jeu.</strong> Selon l'ambiance et le nombre de joueurs.</li>
-          <li><strong>Crée un salon.</strong> Tes potes rejoignent avec un code, un lien ou un QR code. Ou pose un seul téléphone sur la table.</li>
-          <li><strong>Jouez à voix haute.</strong> Le téléphone distribue, compte et arbitre. Vous, vous parlez.</li>
-        </ol>
-      </section>
-
-      <section class="deux-colonnes">
-        <div class="bloc theme-jaune">
-          <h2>Ce qui est gratuit</h2>
-          <ul>
-            <li>Le téléchargement de l'app</li>
-            <li><a href="jeux/la-pyramide/">La Pyramide</a>, toujours</li>
-            <li><a href="jeux/flechettes/">Le compteur de fléchettes</a>, toujours</li>
-            <li>Le niveau Tranquille des Dossiers et de Cap d'assumer ?</li>
-            <li>Une partie d'essai de chaque autre jeu</li>
-          </ul>
-          <p>Le reste se débloque dans l'app, où les prix sont affichés. À plusieurs téléphones, un seul joueur de la table suffit.</p>
-        </div>
-        <div class="bloc theme-menthe">
-          <h2>Ce que PAFOU ne fait pas</h2>
-          <ul>
-            <li>Pas de publicité dans l'app</li>
-            <li>Aucune réponse enregistrée : tout se dit à voix haute</li>
-            <li>Pas de compte obligatoire pour jouer</li>
-            <li>Personne n'est forcé de boire : tout se joue sans alcool</li>
-            <li>Pas de version Android pour l'instant</li>
-          </ul>
-        </div>
-      </section>
-
+{faq_html(FAQ_ACCUEIL, "On te répond")}
+      <p><a href="faq/">Toutes les questions</a></p>
 {cartes_liens("Bien choisir son jeu de soirée", [(g["titre_court"], g["resume"], f"guides/{g['slug']}/") for g in GUIDES[:6]], "Guides")}
 {blog}
-{faq_html(FAQ_ACCUEIL)}
-      <p><a href="faq/">Toutes les questions fréquentes</a></p>
-{cta(prefixe)}
     </div>
+
+    <section class="final">
+      <div class="confettis" aria-hidden="true">{CONFETTIS}</div>
+      <div class="final-persos" aria-hidden="true">{''.join(f'<img class="flotte" src="img/persos/{p}.webp" alt="" width="120" loading="lazy">' for p in ["vin", "canette", "spritz", "cafe", "biere", "mojito"])}</div>
+      <h2 class="autocollant"><span>On joue à quoi</span> <span class="accent">ce soir ?</span></h2>
+      <a class="bouton-store" href="{APP_STORE}" aria-label="Télécharger PAFOU dans l'App Store">{POMME.replace('width="18" height="18"', 'width="30" height="30"')}<span><small>Télécharger dans</small>l'App Store</span></a>
+    </section>
   </main>
+  <script>
+    if ('IntersectionObserver' in window) {{
+      document.documentElement.classList.add('anime');
+      const o = new IntersectionObserver((es) => es.forEach((x) => {{ if (x.isIntersecting) {{ x.target.classList.add('vu'); o.unobserve(x.target); }} }}), {{ threshold: 0.15 }});
+      document.querySelectorAll('.apparait').forEach((el) => o.observe(el));
+    }}
+  </script>
 """
         + pied(prefixe)
     )

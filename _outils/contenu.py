@@ -220,7 +220,7 @@ JEUX = [
         ],
     },
     {
-        "slug": "mode-bar", "nom": "Le Mode bar", "etiquette": "Un seul téléphone", "couleur": "corail", "logo": "bar", "ecran": "bar", "perso": "cafe",
+        "slug": "mode-bar", "nom": "Le Mode bar", "etiquette": "Un seul téléphone", "couleur": "corail", "logo": "bar", "ecran": "bar", "perso": "cocktail",
         "titre": "Le Mode bar : un seul téléphone sur la table, et tout le monde parle",
         "titre_seo": "Mode bar : jeu à faire au bar sur un seul téléphone | PAFOU",
         "description": "Le Mode bar de PAFOU se joue avec un seul téléphone posé sur la table : procès, débats débiles, mot interdit, mission secrète. À partir de 3 joueurs.",
@@ -351,7 +351,7 @@ JEUX = [
         ],
     },
     {
-        "slug": "on-se-decouvre", "nom": "On se découvre", "etiquette": "Faire connaissance", "couleur": "menthe", "logo": "decouvre", "ecran": "decouverte", "perso": "champagne",
+        "slug": "on-se-decouvre", "nom": "On se découvre", "etiquette": "Faire connaissance", "couleur": "menthe", "logo": "decouvre", "ecran": "decouverte", "perso": "cafe",
         "titre": "On se découvre : le jeu pour briser la glace dans un groupe",
         "titre_seo": "On se découvre : jeu pour briser la glace en groupe | PAFOU",
         "description": "On se découvre est le jeu de PAFOU pour un groupe qui ne se connaît pas : première impression, face à face, puis défis en équipes. 3 à 12 joueurs, un seul téléphone.",
@@ -392,7 +392,7 @@ JEUX = [
         ],
     },
     {
-        "slug": "bandes-de-potes", "nom": "Les bandes de potes", "etiquette": "Classement du mois", "couleur": "bleu", "logo": None, "ecran": "bande", "perso": "cocktail",
+        "slug": "bandes-de-potes", "nom": "Les bandes de potes", "etiquette": "Classement du mois", "couleur": "bleu", "logo": None, "ecran": "bande", "perso": "champagne",
         "titre": "Les bandes de potes : le classement du mois entre amis",
         "titre_seo": "Bandes de potes : classement entre amis | PAFOU",
         "description": "Crée ta bande dans PAFOU, invite tes potes avec un lien et suivez le classement du mois : 3 points par victoire, 1 par partie, des titres et des stats.",
