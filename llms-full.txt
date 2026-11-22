@@ -1097,6 +1097,131 @@ R : Sur l'écran d'achat de l'app, touche « Restaurer mes achats ».
 
 ---
 
+# Règles des fléchettes 301 et 501 : cible, points, bust et fin sur un double
+URL : https://pafouapp.fr/blog/regles-flechettes-301-501/
+Publié le 2026-11-22
+
+Au 301 comme au 501, chaque joueur part de ce score et le fait descendre. À son tour, il lance 3 fléchettes et soustrait le total. Le premier qui arrive exactement à zéro gagne. Dans la règle classique, la dernière fléchette doit toucher un double. Si tu dépasses, ton tour est annulé et tu reviens au score d'avant : c'est le « bust ».
+
+## Quel est le but du 301 et du 501 ?
+
+Chaque joueur démarre avec 301 ou 501 points. À chaque tour, il soustrait ce qu'il marque. Le premier à atteindre exactement zéro remporte la manche. Les deux jeux ont les mêmes règles : seul le score de départ change. Le 301 est plus court, bien pour débuter ou jouer à plusieurs. Le 501 est le format des compétitions.
+
+## Combien vaut chaque zone de la cible ?
+
+La cible est divisée en 20 secteurs numérotés de 1 à 20. La valeur d'une fléchette dépend du secteur et de l'anneau touché.
+
+ | | Zone | Valeur | Exemple sur le 20
+
+ | Simple (les deux grandes zones du secteur) | Le numéro | 20
+
+ | Double (fin anneau extérieur) | Le numéro x 2 | 40
+
+ | Triple (fin anneau intérieur, à mi-rayon) | Le numéro x 3 | 60
+
+ | Bull extérieur (anneau autour du centre) | 25 | -
+
+ | Bull central (le centre) | 50 | -
+
+La meilleure fléchette possible est donc le triple 20, à 60 points, et non le centre. Trois triples 20 donnent 180, le maximum d'un tour. Le bull central compte comme un double : c'est le « double 25 ». Une fléchette hors des anneaux, ou qui tombe de la cible, vaut zéro.
+
+## Comment se déroule un tour ?
+
+- Pour savoir qui commence, chacun lance une fléchette : la plus proche du centre ouvre la partie.
+
+- À ton tour, tu lances 3 fléchettes, l'une après l'autre.
+
+- Tu additionnes les trois et tu soustrais le total de ton score.
+
+- Tu retires tes fléchettes, puis c'est au joueur suivant.
+
+Exemple au 501 : tu touches triple 20, simple 20 et simple 5. Tu marques 60 + 20 + 5 = 85. Il te reste 416.
+
+Une fléchette ne compte que si elle reste plantée jusqu'à la fin du tour. Sur une cible classique, le centre est à 1,73 m du sol et la ligne de tir à 2,37 m de la cible. Les cibles électroniques à pointes souples se jouent en général d'un peu plus loin, à 2,44 m.
+
+## Que signifie « finir sur un double » ?
+
+Dans la règle classique, appelée « double out », la fléchette qui t'amène à zéro doit toucher un double ou le bull central. S'il te reste 40, tu dois toucher le double 20. S'il te reste 32, le double 16. S'il te reste 50, le bull central suffit.
+
+Conséquence : le plus petit score finissable est 2 (double 1). Avec un reste impair, tu dois d'abord toucher un simple impair pour revenir sur un nombre pair. Tu n'es pas obligé de lancer tes trois fléchettes : dès que le double est touché, la manche est gagnée.
+
+Entre débutants, tu peux jouer en « fin simple » : n'importe quelle zone qui t'amène pile à zéro termine la partie. Décidez-le avant de commencer.
+
+## Qu'est-ce qu'un bust (dépassement) ?
+
+Il y a bust quand ton tour t'emmène là où tu ne peux pas aller. Avec la fin sur un double, trois cas :
+
+- tu marques plus que ce qu'il te reste ;
+
+- il te reste exactement 1, impossible à finir sur un double ;
+
+- tu arrives à zéro sans double sur la dernière fléchette.
+
+Dans les trois cas, ton tour s'arrête tout de suite, même s'il te reste des fléchettes en main. Les fléchettes de ce tour sont annulées et tu reviens au score que tu avais au début du tour.
+
+Exemple : il te reste 32. Première fléchette dans le simple 16, reste 16. Deuxième dans le simple 20 : dépassement. Tu rejoues au tour suivant avec 32, pas avec 16.
+
+En fin simple, seul le premier cas existe : tu ne peux pas descendre sous zéro.
+
+## Quelles sont les fins classiques à connaître ?
+
+La fin la plus haute possible en trois fléchettes est 170. Voici quelques combinaisons courantes (T = triple, D = double).
+
+ | | Reste | Fin possible
+
+ | 170 | T20, T20, bull central
+
+ | 160 | T20, T20, D20
+
+ | 120 | T20, 20, D20
+
+ | 100 | T20, D20
+
+ | 81 | T19, D12
+
+ | 60 | 20, D20
+
+ | 50 | Bull central, ou 10 puis D20
+
+ | 40 | D20
+
+ | 32 | D16
+
+ | 2 | D1
+
+Certains restes sous 170 ne se finissent pas en un tour : 169, 168, 166, 165, 163, 162 et 159.
+
+Astuce. Vise un reste de 32 quand tu peux. Si tu rates le double 16 et touches le simple 16, il reste 16, donc double 8, puis double 4, double 2, double 1. Tu gardes une chance à chaque fléchette.
+
+## Quelles variantes existent ?
+
+- Entrée sur un double (« double in ») : tes points ne comptent qu'à partir du premier double touché. Variante fréquente au 301.
+
+- Fin simple : pas besoin de double pour terminer.
+
+- En équipes : deux contre deux, un score commun par équipe, les joueurs alternent.
+
+- En manches : le premier à gagner deux ou trois manches remporte le match.
+
+Si tu préfères un jeu plus tactique, où l'on bloque l'adversaire, regarde les règles du Cricket.
+
+## Comment compter les points sans se tromper ?
+
+Le calcul mental est la partie la plus pénible, surtout à la fin. Tu peux noter les scores sur une ardoise : une colonne par joueur, le reste écrit après chaque tour. Les méthodes sont détaillées dans l'article compter les points aux fléchettes.
+
+Tu peux aussi laisser un téléphone compter. PAFOU, un jeu de soirée sur iPhone, contient un compteur de fléchettes pour 2 à 8 joueurs : 301, 501 et Cricket, avec l'option « finir sur un double ». Tu touches la cible à l'écran là où la fléchette est plantée, tu peux annuler une fléchette, la partie est sauvegardée et tout marche sans réseau. Les fléchettes font partie des modes toujours gratuits de PAFOU ; d'autres modes de l'app demandent un achat intégré.
+
+Q : Faut-il obligatoirement finir sur un double au 301 et au 501 ?
+R : Dans la règle classique, oui : la dernière fléchette doit toucher un double ou le bull central. Entre débutants, on joue souvent en fin simple, à décider avant la partie.
+Q : Que se passe-t-il si je dépasse zéro ?
+R : C'est un bust. Ton tour s'arrête, les fléchettes de ce tour sont annulées et tu reprends au score que tu avais au début du tour.
+Q : Combien vaut le centre de la cible ?
+R : Le bull central vaut 50 points et compte comme un double. L'anneau qui l'entoure, le bull extérieur, vaut 25 points.
+Q : Quelle est la différence entre le 301 et le 501 ?
+R : Uniquement le score de départ, donc la durée. Le 301 se joue parfois avec une entrée sur un double, à convenir avant de commencer.
+
+---
+
 # Jeux de soirée sans alcool : 11 jeux qui mettent l'ambiance sans un verre
 URL : https://pafouapp.fr/blog/jeux-de-soiree-sans-alcool/
 Publié le 2026-11-21
